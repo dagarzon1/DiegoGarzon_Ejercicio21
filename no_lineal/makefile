@@ -1,5 +1,6 @@
 grafica.pdf:datos.txt
 	python grafica.py
+	rm datos.txt
 datos.txt:adv.x
 	./adv.x > datos.txt
 	rm adv.x

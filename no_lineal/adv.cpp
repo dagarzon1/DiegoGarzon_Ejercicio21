@@ -1,4 +1,5 @@
 #include<iostream>
+#include<math.h>
 
 using namespace std;
 
@@ -16,22 +17,14 @@ int main()
 	for(int i=0;i<N_x;i++)
 	{
 		x=(h*i);
-		if(x<0.75 || x>1.25)
-		{
-			in_u[i]=0.0;
-			u_old[i]=0.0;
-		}
-		if(x>0.75 && x<1.25)
-		{
-			in_u[i]=1.0;
-			u_old[i]=1.0;
-		}
+		in_u[i]=exp(-0.5 * (x-1)*(x-1)/(0.25*0.25));
+		u_old[i]=exp(-0.5 * (x-1)*(x-1)/(0.25*0.25));
 	}
 	for(int j=0;j<T/h_t;j++)
 	{
 		for(int i=1;i<N_x - 1 ;i++)
 		{
-			u[i]= in_u[i] - ( c * (h_t/h) * ( in_u[i] - in_u[i-1] ) );
+			u[i]= in_u[i] - ( in_u[i] * (h_t/h) * ( in_u[i] - in_u[i-1] ) );
 		}
 		for(int i=1;i<N_x - 1 ;i++)
 		{
